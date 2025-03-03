@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 public class FragmentInfo extends Fragment implements FragmentCallbacks{
@@ -53,10 +54,25 @@ public class FragmentInfo extends Fragment implements FragmentCallbacks{
         next = (Button) view_layout_red.findViewById(R.id.next);
         last = (Button) view_layout_red.findViewById(R.id.last);
 
-        first.setOnClickListener(v -> main.onMsgFromFragToMain("INFO-FLAG","","","","FIRST"));
-        prev.setOnClickListener(v -> main.onMsgFromFragToMain("INFO-FLAG","","","","PREVIOUS"));
-        next.setOnClickListener(v -> main.onMsgFromFragToMain("INFO-FLAG","","","","NEXT"));
-        last.setOnClickListener(v -> main.onMsgFromFragToMain("INFO-FLAG","","","","LAST"));
+        first.setOnClickListener(v -> {
+            main.onMsgFromFragToMain("INFO-FLAG", "", "", "", "FIRST");
+            updateButtonFocus(first);
+        });
+
+        prev.setOnClickListener(v -> {
+            main.onMsgFromFragToMain("INFO-FLAG", "", "", "", "PREVIOUS");
+            updateButtonFocus(prev);
+        });
+
+        next.setOnClickListener(v -> {
+            main.onMsgFromFragToMain("INFO-FLAG", "", "", "", "NEXT");
+            updateButtonFocus(next);
+        });
+
+        last.setOnClickListener(v -> {
+            main.onMsgFromFragToMain("INFO-FLAG", "", "", "", "LAST");
+            updateButtonFocus(last);
+        });
 
 
         return view_layout_red;
@@ -66,6 +82,17 @@ public class FragmentInfo extends Fragment implements FragmentCallbacks{
         txtName.setText("Name: " + name);
         txtClass.setText("Class: " + classid);
         txtScore.setText("Average score: "+ score);
+    }
+
+    private void updateButtonFocus(Button selectedButton) {
+
+        first.setBackgroundColor(ContextCompat.getColor(context, android.R.color.darker_gray)); // Default color
+        prev.setBackgroundColor(ContextCompat.getColor(context, android.R.color.darker_gray));
+        next.setBackgroundColor(ContextCompat.getColor(context, android.R.color.darker_gray));
+        last.setBackgroundColor(ContextCompat.getColor(context, android.R.color.darker_gray));
+
+        // Highlight the selected button
+        selectedButton.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_blue_light));
     }
 
 }

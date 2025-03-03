@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -93,6 +92,7 @@ public class FragmentID extends Fragment{
                 String classid = classID[currentPage * pageSize + position];
                 String score = scores[currentPage * pageSize + position];
                 main.onMsgFromFragToMain("ID-FLAG", name, classid, score, "");
+
             }
         });
 
@@ -191,4 +191,5 @@ public class FragmentID extends Fragment{
     private void updateSelection() {
         main.onMsgFromFragToMain("ID-FLAG", sid[currentPage * pageSize + currentIndex], classID[currentPage * pageSize + currentIndex], scores[currentPage * pageSize + currentIndex], "");
     }
+
 }
